@@ -1,4 +1,47 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - fileSystemServiceAccountCredential:
+          id: "b53221b9-8338-4560-8bcf-63c6744a8564"
+          scope: GLOBAL
 jenkins:
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      credentialsId: "b53221b9-8338-4560-8bcf-63c6744a8564"
+      jenkinsTunnel: "jenkins:50000"
+      jenkinsUrl: "http://jenkins"
+      name: "kubernetes"
+      namespace: "jenkins"
+      serverUrl: "https://kubernetes.default:443"
+      templates:
+      - containers:
+        - args: ""
+          command: ""
+          image: "aimvector/jenkins-slave"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          ttyEnabled: true
+          workingDir: "/home/jenkins/agent"
+        id: "37eedfb3-1fdd-4efa-84d4-0b26cd0d5ede"
+        label: "jenkins-slave"
+        name: "jenkins-slave"
+        namespace: "jenkins"
+        serviceAccount: "jenkins"
+        slaveConnectTimeout: 300
+        slaveConnectTimeoutStr: "300"
+        volumes:
+        - hostPathVolume:
+            hostPath: "/var/run/docker.sock"
+            mountPath: "/var/run/docker.sock"
+        yamlMergeStrategy: "override"
   securityRealm:
     local:
       allowsSignup: false
