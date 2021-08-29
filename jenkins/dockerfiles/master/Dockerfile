@@ -7,4 +7,3 @@ COPY casc.yaml /var/jenkins_home_config/casc.yaml
 COPY client.crt /var/jenkins_home_config/.minikube/profiles/minikube/client.crt
 COPY client.key /var/jenkins_home_config/profiles/minikube/client.key 
 COPY ca.crt /var/jenkins_home_config/.minikube/ca.crt
-COPY JakeRepo.xml /usr/share/jenkins/ref/jobs/Jake/config.xml
